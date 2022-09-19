@@ -1,27 +1,33 @@
-FROM gcc:8.3
-# FROM arm64=arm64v8/gcc:8.3
-
-RUN apt-get update \
-    && apt-get install -y \
-        kernel-wedge \
-        libncurses-dev \
-        fakeroot \
-        cpio \
-        bison \
-        flex \
-        ccache \
-        vim \
-        gnupg2 \
-        locales \
-        bc \
-        kmod \
-        libelf-dev \
-        rsync \
-        gawk  \
-        libudev-dev \
-        pciutils-dev \
-        libssl-dev \
-    && rm -f /bin/sh && ln -s /bin/bash /bin/sh
+FROM library/buildpack-deps:jammy
+RUN apt-get --assume-yes update \
+ && apt-get --assume-yes install --no-install-recommends --upgrade \
+    bc \
+    bison \
+    ccache \
+    cpio \
+    dkms \
+    dwarves \
+    fakeroot \
+    flex \
+    gawk  \
+    gcc-9 \
+    gnupg2 \
+    kernel-wedge \
+    kmod \
+    less \
+    libelf-dev \
+    libiberty-dev \
+    liblz4-tool \
+    libncurses-dev \
+    libpci-dev \
+    libssl-dev \
+    libudev-dev \
+    linux-libc-dev \
+    locales \
+    rsync \
+    vim \
+    zstd \
+ && rm -f /bin/sh && ln -s /bin/bash /bin/sh
 
 ########## Dapper Configuration #####################
 
@@ -37,10 +43,10 @@ WORKDIR ${DAPPER_SOURCE}
 ARG DAPPER_HOST_ARCH
 ENV ARCH $DAPPER_HOST_ARCH
 
-# https://git.launchpad.net/ubuntu/+source/linux-aws/tree/?h=ubuntu/bionic
-ARG KERNEL_ORIG_URL=http://archive.ubuntu.com/ubuntu/pool/main/l/linux-aws/linux-aws_4.15.0.orig.tar.gz
+# https://git.launchpad.net/ubuntu/+source/linux-aws/
+ARG KERNEL_ORIG_URL=http://archive.ubuntu.com/ubuntu/pool/main/l/linux-aws/linux-aws_5.19.0.orig.tar.gz
 
-ARG KERNEL_DIFF_URL=http://archive.ubuntu.com/ubuntu/pool/main/l/linux-aws/linux-aws_4.15.0-1038.40.diff.gz
+ARG KERNEL_DIFF_URL=http://archive.ubuntu.com/ubuntu/pool/main/l/linux-aws/linux-aws_5.19.0-1006.6.diff.gz
 
 ENV KERNEL_ORIG_URL=${KERNEL_ORIG_URL} \
     KERNEL_DIFF_URL=${KERNEL_DIFF_URL} \
