@@ -46,7 +46,7 @@ ENV ARCH $DAPPER_HOST_ARCH
 # https://git.launchpad.net/ubuntu/+source/linux-aws/
 ARG KERNEL_ORIG_URL=http://archive.ubuntu.com/ubuntu/pool/main/l/linux-aws/linux-aws_5.19.0.orig.tar.gz
 
-ARG KERNEL_DIFF_URL=http://archive.ubuntu.com/ubuntu/pool/main/l/linux-aws/linux-aws_5.19.0-1006.6.diff.gz
+ARG KERNEL_DIFF_URL=http://archive.ubuntu.com/ubuntu/pool/main/l/linux-aws/linux-aws_5.19.0-1006.5.diff.gz
 
 ENV KERNEL_ORIG_URL=${KERNEL_ORIG_URL} \
     KERNEL_DIFF_URL=${KERNEL_DIFF_URL} \
